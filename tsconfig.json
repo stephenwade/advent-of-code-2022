@@ -1,0 +1,12 @@
+{
+  "include": [".eslintrc.js", "**/*.ts"],
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "allowJs": true
+  }
+}
