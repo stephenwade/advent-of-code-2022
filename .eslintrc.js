@@ -29,6 +29,7 @@ module.exports = {
     'unused-imports/no-unused-vars': 'warn',
 
     'unicorn/filename-case': 'off',
+    'unicorn/no-array-callback-reference': 'off',
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-module': 'off',
