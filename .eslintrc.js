@@ -30,8 +30,10 @@ module.exports = {
 
     'unicorn/filename-case': 'off',
     'unicorn/no-array-callback-reference': 'off',
+    'unicorn/no-array-reduce': 'off',
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
+    'unicorn/prefer-code-point': 'off',
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-switch': 'off',
     'unicorn/prevent-abbreviations': 'off',

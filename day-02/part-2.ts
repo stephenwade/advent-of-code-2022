@@ -1,6 +1,9 @@
 #!/usr/bin/env node -r @swc-node/register
 
+import * as assert from 'node:assert';
+
 import { readInput } from '~/util/read-input';
+import { sum } from '~/util/reducers';
 
 const inputText = readInput(__dirname);
 
@@ -27,10 +30,13 @@ const decryptRequirement: Record<string, ResultRequirement> = {
 function parse(line: string): Round {
   const [opp, res] = line.split(' ');
 
-  return {
-    opponent: decryptChoice[opp],
-    response: decryptRequirement[res],
-  };
+  const opponent = decryptChoice[opp];
+  const response = decryptRequirement[res];
+
+  assert.ok(opponent);
+  assert.ok(response);
+
+  return { opponent, response };
 }
 
 const strategy = inputText.split('\n').map(parse);
@@ -69,4 +75,4 @@ function score(round: Round): number {
   return scoreShape(round) + play(round);
 }
 
-console.log(strategy.map(score).reduce((a, b) => a + b));
+console.log(strategy.map(score).reduce(sum));

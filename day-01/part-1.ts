@@ -1,6 +1,7 @@
 #!/usr/bin/env node -r @swc-node/register
 
 import { readInput } from '~/util/read-input';
+import { sum } from '~/util/reducers';
 
 const inputText = readInput(__dirname);
 
@@ -11,7 +12,7 @@ for (const elfLines of inputText.split('\n\n')) {
 
 let largestCalories = 0;
 for (const elf of elves) {
-  const calories = elf.reduce((acc, c) => acc + c, 0);
+  const calories = elf.reduce(sum);
   largestCalories = Math.max(largestCalories, calories);
 }
 
