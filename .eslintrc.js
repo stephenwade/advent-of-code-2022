@@ -14,6 +14,7 @@ module.exports = {
   plugins: ['import', 'simple-import-sort', 'unused-imports'],
 
   rules: {
+    'no-plusplus': 'warn',
     quotes: ['warn', 'single', { avoidEscape: true }],
     'require-unicode-regexp': 'warn',
 
