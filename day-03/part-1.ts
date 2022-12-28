@@ -31,7 +31,7 @@ function findCommonItem({ left, right }: Rucksack): string {
   const commonItems = intersection(left, right);
 
   assert.equal(commonItems.length, 1);
-  return commonItems[0];
+  return commonItems[0] as string;
 }
 
 const a = 'a'.charCodeAt(0);

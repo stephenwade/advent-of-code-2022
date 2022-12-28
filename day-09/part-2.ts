@@ -13,6 +13,8 @@ type Direction = typeof DIRECTIONS[number];
 function* instructions(): Generator<Direction> {
   for (const line of inputText.split('\n')) {
     const [direction, countText] = line.split(' ');
+    assert(direction);
+    assert(countText);
     assert((DIRECTIONS as readonly string[]).includes(direction));
 
     for (let i = 0; i < Number(countText); i += 1) {
@@ -37,15 +39,19 @@ tailPositions.add(positionToString(last(rope)));
 
 function updatePositions(direction: Direction) {
   // update head
-  if (direction === 'D') rope[0].y -= 1;
-  if (direction === 'L') rope[0].x -= 1;
-  if (direction === 'R') rope[0].x += 1;
-  if (direction === 'U') rope[0].y += 1;
+  const head = rope[0];
+  assert(head);
+  if (direction === 'D') head.y -= 1;
+  if (direction === 'L') head.x -= 1;
+  if (direction === 'R') head.x += 1;
+  if (direction === 'U') head.y += 1;
 
   // update rest of rope
   for (let i = 1; i < rope.length; i += 1) {
     const previousKnot = rope[i - 1];
     const thisKnot = rope[i];
+    assert(previousKnot);
+    assert(thisKnot);
     if (
       Math.abs(previousKnot.x - thisKnot.x) > 1 ||
       Math.abs(previousKnot.y - thisKnot.y) > 1

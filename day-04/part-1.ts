@@ -15,6 +15,8 @@ type SectionAssignmentPair = [SectionAssignment, SectionAssignment];
 
 function parseAssignment(input: string): SectionAssignment {
   const [lower, upper] = input.split('-').map(Number);
+  assert(typeof lower === 'number');
+  assert(typeof upper === 'number');
   assert(!Number.isNaN(lower));
   assert(!Number.isNaN(upper));
   assert(lower <= upper);

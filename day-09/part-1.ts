@@ -12,6 +12,8 @@ type Direction = typeof DIRECTIONS[number];
 function* instructions(): Generator<Direction> {
   for (const line of inputText.split('\n')) {
     const [direction, countText] = line.split(' ');
+    assert(direction);
+    assert(countText);
     assert((DIRECTIONS as readonly string[]).includes(direction));
 
     for (let i = 0; i < Number(countText); i += 1) {

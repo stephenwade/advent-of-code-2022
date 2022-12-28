@@ -29,6 +29,8 @@ const decryptRequirement: Record<string, ResultRequirement> = {
 
 function parse(line: string): Round {
   const [opp, res] = line.split(' ');
+  assert(opp);
+  assert(res);
 
   const opponent = decryptChoice[opp];
   const response = decryptRequirement[res];

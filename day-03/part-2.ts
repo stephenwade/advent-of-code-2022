@@ -14,7 +14,11 @@ function* getRucksackGroups(): Generator<[string, string, string]> {
   assert.equal(rucksacks.length % 3, 0);
 
   for (let i = 0; i < rucksacks.length; i += 3) {
-    yield [rucksacks[i], rucksacks[i + 1], rucksacks[i + 2]];
+    yield [
+      rucksacks[i] as string,
+      rucksacks[i + 1] as string,
+      rucksacks[i + 2] as string,
+    ];
   }
 }
 
@@ -22,7 +26,7 @@ function findCommonItem(group: [string, string, string]): string {
   const commonItems = intersection(intersection(group[0], group[1]), group[2]);
 
   assert.equal(commonItems.length, 1);
-  return commonItems[0];
+  return commonItems[0] as string;
 }
 
 const a = 'a'.charCodeAt(0);

@@ -11,26 +11,42 @@ const grid: number[][] = inputText
   .map((line) => [...line].map(Number));
 
 function* up(row: number, column: number): Generator<number> {
+  const gridRow = grid[row];
+  assert(gridRow);
   for (let i = column; i >= 0; i -= 1) {
-    yield grid[row][i];
+    const result = gridRow[i];
+    assert(result !== undefined);
+    yield result;
   }
 }
 
 function* down(row: number, column: number): Generator<number> {
-  for (let i = column; i < grid.length; i += 1) {
-    yield grid[row][i];
+  const gridRow = grid[row];
+  assert(gridRow);
+  for (let i = column; i < gridRow.length; i += 1) {
+    const result = gridRow[i];
+    assert(result !== undefined);
+    yield result;
   }
 }
 
 function* left(row: number, column: number): Generator<number> {
   for (let i = row; i >= 0; i -= 1) {
-    yield grid[i][column];
+    const gridRow = grid[i];
+    assert(gridRow);
+    const result = gridRow[column];
+    assert(result !== undefined);
+    yield result;
   }
 }
 
 function* right(row: number, column: number): Generator<number> {
-  for (let i = row; i < grid[row].length; i += 1) {
-    yield grid[i][column];
+  for (let i = row; i < grid.length; i += 1) {
+    const gridRow = grid[i];
+    assert(gridRow);
+    const result = gridRow[column];
+    assert(result !== undefined);
+    yield result;
   }
 }
 
@@ -51,7 +67,9 @@ function isVisible(row: number, column: number): boolean {
 let result = 0;
 // eslint-disable-next-line unicorn/no-for-loop
 for (let row = 0; row < grid.length; row += 1) {
-  for (let column = 0; column < grid[row].length; column += 1) {
+  const gridRow = grid[row];
+  assert(gridRow);
+  for (let column = 0; column < gridRow.length; column += 1) {
     if (isVisible(row, column)) result += 1;
   }
 }

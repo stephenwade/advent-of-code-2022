@@ -1,3 +1,5 @@
+import * as assert from 'node:assert';
+
 /******************************************************************************
  * Created 2008-08-19.
  *
@@ -67,6 +69,7 @@ const singleSourceShortestPaths = (
       if (adjacentNodes.hasOwnProperty(adjacentNode)) {
         // Get the cost of the edge running from closestValue to adjacentNode.
         const adjacentNodeCost = adjacentNodes[adjacentNode];
+        assert(adjacentNodeCost !== undefined);
 
         // Cost of s to closestValue plus the cost of closestValue to adjacentNode across e--this is *a*
         // cost from s to adjacentNode that may or may not be less than the current
@@ -78,7 +81,7 @@ const singleSourceShortestPaths = (
         // cost of closestValue to adjacentNode across e), update adjacentNode's cost in the cost list and
         // update adjacentNode's predecessor in the predecessor list (it's now closestValue).
         const cost_of_s_to_v = costs[adjacentNode];
-        const first_visit = costs[adjacentNode] === undefined;
+        const first_visit = cost_of_s_to_v === undefined;
         if (first_visit || cost_of_s_to_v > totalCostToAdjecentNode) {
           costs[adjacentNode] = totalCostToAdjecentNode;
           addToQueue(adjacentNode, totalCostToAdjecentNode);
@@ -100,11 +103,12 @@ const extractShortestPathFromPredecessorList = (
   predecessors: Predecessors,
   destination: string
 ) => {
-  const nodes = [];
-  let closestValue = destination;
+  const nodes: string[] = [];
+  let closestValue: string | undefined = destination;
   while (closestValue) {
     nodes.push(closestValue);
-    closestValue = predecessors[closestValue];
+    const nextClosestValue: string | undefined = predecessors[closestValue];
+    closestValue = nextClosestValue;
   }
   nodes.reverse();
   return nodes;
@@ -124,8 +128,10 @@ export const findPathWithCost = (
     start,
     destination
   );
+  const destinationCost = costs[destination];
+  assert(destinationCost !== undefined);
   return [
     extractShortestPathFromPredecessorList(predecessors, destination),
-    costs[destination],
+    destinationCost,
   ];
 };

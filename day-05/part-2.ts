@@ -7,12 +7,16 @@ import { readInput } from '~/util/read-input';
 const inputText = readInput(__dirname);
 
 const [stacksText, instructionsText] = inputText.split('\n\n');
+assert(stacksText);
+assert(instructionsText);
 
 type Stacks = Record<string, string[]>;
 
 function parseStacks(input: string): Stacks {
   const stacksLines = input.split('\n');
-  const stacksCount = (stacksLines[0].length + 1) / 4;
+  const firstLine = stacksLines[0];
+  assert(firstLine);
+  const stacksCount = (firstLine.length + 1) / 4;
 
   const stackArrays: string[][] = [];
   for (let i = 0; i < stacksCount; i += 1) {
@@ -22,7 +26,9 @@ function parseStacks(input: string): Stacks {
   for (const line of stacksLines) {
     for (let i = 0; i < stacksCount; i += 1) {
       const item = line.slice(i * 4 + 1, i * 4 + 2);
-      stackArrays[i].push(item);
+      const thisArray = stackArrays[i];
+      assert(thisArray);
+      thisArray.push(item);
     }
   }
 
@@ -51,16 +57,24 @@ function parseInstruction(input: string): Instruction {
   assert(matchResult);
 
   const [, moveStr, from, to] = matchResult;
-  return { move: Number(moveStr), from, to };
+  return {
+    move: Number(moveStr),
+    from: from as string,
+    to: to as string,
+  };
 }
 
 const instructions = instructionsText.split('\n').map(parseInstruction);
 
 for (const { move, from, to } of instructions) {
-  const crates = stacks[from].slice(-move);
+  const stackFrom = stacks[from];
+  assert(stackFrom);
+  const crates = stackFrom.slice(-move);
 
-  stacks[from] = stacks[from].slice(0, -move);
-  stacks[to].push(...crates);
+  stacks[from] = stackFrom.slice(0, -move);
+  const stackTo = stacks[to];
+  assert(stackTo);
+  stackTo.push(...crates);
 }
 
 console.log(

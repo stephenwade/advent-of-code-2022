@@ -27,6 +27,8 @@ function parseLine(input: string): OutputLine {
 
   assert.match(input, /^\d+/u);
   const [size, name] = input.split(' ');
+  assert(size);
+  assert(name);
   return { type: 'result', size: Number(size), name };
 }
 
