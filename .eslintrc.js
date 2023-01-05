@@ -38,6 +38,7 @@ module.exports = {
     'unicorn/prefer-code-point': 'off',
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-switch': 'off',
+    'unicorn/prefer-top-level-await': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/switch-case-braces': 'off',
   },
