@@ -1,3 +1,5 @@
+const ENABLE_DISPLAY = false;
+
 type PointString = `${number},${number}`;
 
 export class Point {
@@ -83,6 +85,8 @@ export class Cave {
   }
 
   log(currentSand?: Point): void {
+    if (!ENABLE_DISPLAY) return;
+
     const get = (x: number, y: number) => {
       if (currentSand?.equals(x, y)) return true;
       return this.get(x, y);
