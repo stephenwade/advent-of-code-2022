@@ -11,15 +11,13 @@ const lines = inputText.split('\n').map(parseLine).map(getPointsFromLine);
 
 const cave = new Cave(lines);
 
-function dropSand(show: boolean): void {
+function dropSand(): void {
   const newSand: Point = Point.fromPoint(SAND_SOURCE);
   let settled = false;
 
-  while (!settled) {
-    if (show) {
-      cave.log(newSand);
-    }
+  cave.log(newSand);
 
+  while (!settled) {
     if (cave.get(newSand.x, newSand.y + 1) === undefined) {
       newSand.y += 1;
     } else if (cave.get(newSand.x - 1, newSand.y + 1) === undefined) {
@@ -42,7 +40,7 @@ function dropSand(show: boolean): void {
 let count = 0;
 try {
   while (true) {
-    dropSand(count % 100 === 0);
+    dropSand();
     count += 1;
   }
 } catch {

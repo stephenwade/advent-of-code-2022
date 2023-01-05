@@ -51,12 +51,6 @@ const TOP = '\u2580';
 const BOTTOM = '\u2584';
 const BOTH = '\u2588';
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
 export class Cave {
   private board: Map<PointString, CavePoint> = new Map();
 
